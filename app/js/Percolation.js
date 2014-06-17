@@ -5,10 +5,9 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
         var service = {
 			grid: [],
 			gridSize: 0,
-			WeightedQuickUnionUF: {}, 
 			init: function(N) {
 				service.gridSize = N;
-				service.WeightedQuickUnionUF = WeightedQuickUnionUF.init(N*N+2);
+				WeightedQuickUnionUF.init(N*N+2);
 				
 				// Initialize the array
 				for (var i = 0; i < N; i++) {
@@ -21,6 +20,76 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 			},
 		
 			open: function(i,j) {
+			
+		        var p;
+				var q;
+				var wufPositionTarget;
+				var wufPositionSource;
+				
+				
+				if( !WeightedQuickUnionUF.isOpen(i,j)) {
+
+                service.grid[i][j] = 1;
+
+                // item can be connected up, down, left, or right, so need 4 checks
+                // to then do all unions off of
+
+                p = i;
+                q = j;
+                wufPositionSource = (q) + (service.gridSize  * p) + 1;
+
+                // check the up
+                if(i > 0){
+                    p = i-1;
+                    q = j;
+                    wufPositionTarget = (q) + (service.gridSize  * p) + 1;
+                    if(service.isOpen(p,q) && !WeightedQuickUnionUF.connected(wufPositionTarget,wufPositionSource)){
+                        WeightedQuickUnionUF.union(wufPositionTarget,wufPositionSource);
+                    }
+                } else if(i == 0){
+                    // union with our super root since we are in 1st row
+                    if(!WeightedQuickUnionUF.connected(wufPositionSource,0)) {
+                        WeightedQuickUnionUF.union(wufPositionSource, 0);
+                    }
+                }
+
+                // check the down
+                if(i < service.gridSize-1){
+                    p = i+1;
+                    q = j;
+                    wufPositionTarget = (q) + (service.gridSize  * p) + 1;
+                    if(service.isOpen(p,q) &&  !WeightedQuickUnionUF.connected(wufPositionTarget,wufPositionSource)){
+                        WeightedQuickUnionUF.union(wufPositionTarget,wufPositionSource);
+                    }
+                } else if(i == service.gridSize - 1){
+                    // union with our super root since we are in 1st row
+                    if(!WeightedQuickUnionUF.connected(wufPositionSource,service.gridSize*service.gridSize+1)) {
+                        WeightedQuickUnionUF.union(wufPositionSource, service.gridSize*service.gridSize+1);
+                    }
+                }
+
+                // check the right
+                if(j < service.gridSize-1){
+                    p = i;
+                    q = j+1;
+                    wufPositionTarget = (q) + (service.gridSize  * p) + 1;
+                    if(service.isOpen(p,q) && !WeightedQuickUnionUF.connected(wufPositionTarget,wufPositionSource)){
+                        WeightedQuickUnionUF.union(wufPositionTarget,wufPositionSource);
+                    }
+                }
+
+                // check the left
+                if(j > 0){
+                    p = i;
+                    q = j-1;
+                    wufPositionTarget = (q) + (service.gridSize  * p) + 1;
+                    if(service.isOpen(p,q) &&  !WeightedQuickUnionUF.connected(wufPositionTarget,wufPositionSource)){
+                        console.log("Union (" + wufPositionSource + ", " + wufPositionTarget + ")");
+                        WeightedQuickUnionUF.union(wufPositionTarget,wufPositionSource);
+                    }
+                }
+				
+				}				
 			
 			},
 			
@@ -37,14 +106,40 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 
 			// does the system percolate?
 			percolates: function(){
-				lastSpot = service.gridSize*service.gridSize+1;
-				return service.WeightedQuickUnionUF.connected(0,service.gridSize*service.gridSize+1);
+				lastSpot = service.gridSize * service.gridSize + 1;
+				return WeightedQuickUnionUF.connected(0,service.gridSize * service.gridSize + 1);
 			},
 
 		
 			getGrid: function(){
 				return service.grid;
+			},
+			
+			printGrid: function() {
+
+				console.log("---------- Grid ----------");
+
+				numOpen = 0;
+
+				for (var i = 0; i < service.grid.length; i++) {
+					var output = "";
+					for (var j = 0; j < service.grid[i].length; j++) {
+						output += service.grid[i][j] + " ";
+						if(service.grid[i][j] == 1){
+							numOpen++;
+						}
+					}
+					console.log(output);
+				    console.log("");
+				}
+				//System.out.println("Open sites: " + numOpen + ", " + (wuf.count()-2) + ", " + gridSize*gridSize);
+				//double percentOpen = (double) numOpen/(gridSize*gridSize) * 100;
+				//System.out.println("Percent Open: " + percentOpen);
+				//System.out.format("% of open sites:  %d", percentOpen);
+
 			}
+			
+			
         };
 
         return service;
@@ -135,27 +230,7 @@ public class Percolation {
         }
     }
 
-    public void printGrid() {
-
-        System.out.println("---------- Grid ----------");
-
-        int numOpen = 0;
-
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-               // System.out.print(grid[i][j] + " ");
-                if(grid[i][j] == 1){
-                    numOpen++;
-                }
-            }
-           // System.out.println();
-        }
-        System.out.println("Open sites: " + numOpen + ", " + (wuf.count()-2) + ", " + gridSize*gridSize);
-        double percentOpen = (double) numOpen/(gridSize*gridSize) * 100;
-        System.out.println("Percent Open: " + percentOpen);
-        //System.out.format("% of open sites:  %d", percentOpen);
-
-    }
+   
 
 
 

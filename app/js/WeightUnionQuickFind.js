@@ -19,6 +19,7 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 					service.id[i] = i;
 					service.sz[i] = 1;
 				}
+				return service;
 			},
 			
 			getArray: function() {
