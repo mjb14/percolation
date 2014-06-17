@@ -17,7 +17,11 @@ angular.module('myApp.controllers', [])
 		
 		WeightedQuickUnionUF.union($scope.p, $scope.q);
 		
-		$scope.numComponents = WeightedQuickUnionUF.count();
+	}
+
+	$scope.getCount = function() {
+		$scope.numComponents = WeightedQuickUnionUF.getCount();
+		$scope.arrayData = WeightedQuickUnionUF.getArray();
 	}
 	
 	$scope.wquf = WeightedQuickUnionUF;

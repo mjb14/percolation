@@ -21,12 +21,16 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 				}
 			},
 			
+			getArray: function() {
+				return service.id;
+			},
+			
 			/**
 			 * Returns the number of components.
 			 * @return the number of components (between 1 and N)
 			 */
-			count: function() {
-				console.log("WeightedQuickUnionUF.count()");
+			getCount: function() {
+				console.log("WeightedQuickUnionUF.getCount()");
 				return service.count;
 			},
 			
