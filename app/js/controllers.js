@@ -3,8 +3,12 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('WqufController', ['$scope', 'WeightedQuickUnionUF', function($scope, WeightedQuickUnionUF) {
+  .controller('WqufController', ['$scope', 'WeightedQuickUnionUF', 'Percolation', function($scope, WeightedQuickUnionUF, Percolation) {
 
+  
+	Percolation.init(5);
+	$scope.grid = Percolation.getGrid();
+  
   
 	$scope.init = function() {
 		WeightedQuickUnionUF.init($scope.n);	
