@@ -179,15 +179,10 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 
 				console.log("---------- Grid ----------");
 
-				numOpen = 0;
-
 				for (var i = 0; i < service.grid.length; i++) {
 					var output = "";
 					for (var j = 0; j < service.grid[i].length; j++) {
 						output += service.grid[i][j] + " ";
-						if(service.grid[i][j] == 1){
-							numOpen++;
-						}
 					}
 					console.log(output);
 				    console.log("");
@@ -199,7 +194,7 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 				var numberOpen = 0;
 				for (var i = 0; i < service.grid.length; i++) {
 					for (var j = 0; j < service.grid[i].length; j++) {
-						if(service.grid[i][j] == 1){
+						if(service.grid[i][j] == 1 || service.grid[i][j] == 9){
 							numberOpen++;
 						}
 					}
