@@ -9,24 +9,19 @@
   <title>Percolation Problem</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/app.css" media="all" rel="stylesheet">
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/wquf">view1</a></li>
-  </ul>
 
   <div ng-view></div>
-
   
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
   
   <script src="js/app.js"></script>
-  <script src="js/Percolation.js"></script>
-  <script src="js/WeightUnionQuickFind.js"></script>
+  <script src="js/services/Percolation.js"></script>
+  <script src="js/services/WeightUnionQuickFind.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
 </body>
 </html>

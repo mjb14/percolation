@@ -1,20 +1,17 @@
 
-N: <input type="text" data-ng-model="n"> <button type="button" data-ng-click="init()">Init</button> <br>
-p: <input type="text" data-ng-model="p"><br>
-q: <input type="text" data-ng-model="q"><br>
 
-
-<button type="button" data-ng-click="connect()">Join p & q</button>
+<form name="myForm" >
+N: <input type="number" name="input" data-ng-model="n" min="0" max="99" required>
+<span class="error" ng-show="myForm.input.$error.required">N is Required.</span>
+<span class="error" ng-show="myForm.input.$error.number">N is not valid number.</span>
+<button data-ng-disabled="!myForm.input.$valid" type="button" data-ng-click="runSimulation()">Run Simulation</button> 
+</form>
 
 <hr>
-<button type="button" data-ng-click="getCount()">Get Count</button>
-Number of components: {{ numComponents }}
 
+<div data-ng-repeat="row in grid()">
+	<span data-ng-repeat="item in row track by $index" class="site" data-ng-class="{open: item === 1, closed: item === 0}">
+		-- {{item}} --
+	</span>
+</div>
 
-<pre>
-{{ arrayData | json}}
-</pre>
-
-<pre>
-{{ grid | json }}
-</pre>

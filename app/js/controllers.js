@@ -3,82 +3,44 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('WqufController', ['$scope', 'WeightedQuickUnionUF', 'Percolation', function($scope, WeightedQuickUnionUF, Percolation) {
+  .controller('WqufController', ['$scope', '$timeout', 'Percolation', function($scope, $timeout, Percolation) {
 
-  
-  /*
-	Percolation.init(5);
-	$scope.grid = Percolation.getGrid();
-	Percolation.printGrid();
-  
-	$scope.init = function() {
-		WeightedQuickUnionUF.init($scope.n);	
-	}
-  
-	$scope.connect = function() {
-		if( WeightedQuickUnionUF.connected($scope.p, $scope.q) ) {
-			return;
-		}
-		
-		WeightedQuickUnionUF.union($scope.p, $scope.q);
-		
-	}
-
-	$scope.getCount = function() {
-		$scope.numComponents = WeightedQuickUnionUF.getCount();
-		$scope.arrayData = WeightedQuickUnionUF.getArray();
-	}
-	
-	$scope.wquf = WeightedQuickUnionUF;
-	*/
-	
 	 var getRandomNumber = function(N){
-        return Math.floor((Math.random() * N) + 1);
+        return Math.floor((Math.random() * N) + 1 - 1);
     }
 
-	var openRandomSite = function(p, N){
+	var openRandomSite = function(N){
+        var i = getRandomNumber(N);
+        var j = getRandomNumber(N);
 
-        i = getRandomNumber(N);
-        j = getRandomNumber(N);
-
-        if(p.isFull(i,j)){
-            p.open(i,j);
+        if(Percolation.isFull(i,j)){
+            Percolation.open(i,j);
             return true;
         } 
 		else{
-			return openRandomSite(p, N);
+			return openRandomSite(N);
 		}
     }
 	
-	var openSitesUntilPercolates = function(p, N) {
-        while(!p.percolates()) {
-            openRandomSite(p,N);
-            p.printGrid();
-        }
+	var openSitesUntilPercolates = function(N) {
+		if(!Percolation.percolates()){
+		    openRandomSite(N);
+            Percolation.printGrid();
+			$timeout(function(){openSitesUntilPercolates(N);}, 500, true);
+		}
     }
 	
-		var N = 3;
-        Percolation.init(N);
-		Percolation.open(1,1);
-        //openSitesUntilPercolates(Percolation, N);
+	$scope.grid = function() {
+		return Percolation.getGrid();
+	}
 	
+	$scope.runSimulation = function() {
+		var N = $scope.n;
+		Percolation.init(N);
+        openSitesUntilPercolates(N);
+	}
 	
-	/*
-    
-
-    public static void openSitesUntilPercolates(Percolation p, int N){
-        while(!p.percolates()) {
-            openRandomSite(p,N);
-            p.printGrid();
-        }
-    }
-
-
-    public static void main(String[] args) {
-        int N = 100;
-        Percolation p = new Percolation(N);
-        openSitesUntilPercolates(p, N);
-    }
-	*/
+	$scope.n = 3;
+	
   
   }]);

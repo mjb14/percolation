@@ -9,11 +9,10 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 			
 			/**
 			 * Initializes an empty union-find data structure with N isolated components 0 through N-1.
-			 * @throws java.lang.IllegalArgumentException if N < 0
 			 * @param N the number of objects
 			 */
 			init: function(N){
-				console.log("WeightedQuickUnionUF.init(" + N + ")");
+				//console.log("WeightedQuickUnionUF.init(" + N + ")");
 				service.count = N;
 				for (var i = 0; i < N; i++) {
 					service.id[i] = i;
@@ -31,7 +30,7 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 			 * @return the number of components (between 1 and N)
 			 */
 			getCount: function() {
-				console.log("WeightedQuickUnionUF.getCount()");
+				//console.log("WeightedQuickUnionUF.getCount()");
 				return service.count;
 			},
 			
@@ -39,13 +38,12 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 			 * Returns the component identifier for the component containing site <tt>p</tt>.
 			 * @param p the integer representing one site
 			 * @return the component identifier for the component containing site <tt>p</tt>
-			 * @throws java.lang.IndexOutOfBoundsException unless 0 <= p < N
 			 */
 			find: function(p) {
-				console.log("WeightedQuickUnionUF.find(" + p + ")");
+				//console.log("WeightedQuickUnionUF.find(" + p + ")");
 				while (p != service.id[p])
 				p = service.id[p];
-				console.log("p:", p);
+				//console.log("p:", p);
 				return p;
 			},
 			
@@ -55,10 +53,9 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 			* @param q the integer representing the other site
 			* @return <tt>true</tt> if the two sites <tt>p</tt> and <tt>q</tt>
 			*    are in the same component, and <tt>false</tt> otherwise
-			* @throws java.lang.IndexOutOfBoundsException unless both 0 <= p < N and 0 <= q < N
 			*/
 			connected: function(p, q) {
-				console.log("WeightedQuickUnionUF.connected(" + p + ", " + q + ")");
+				//console.log("WeightedQuickUnionUF.connected(" + p + ", " + q + ")");
 				return service.find(p) == service.find(q);
 			},
 			
@@ -67,7 +64,6 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 			* containing site <tt>q</tt>.
 			* @param p the integer representing one site
 			* @param q the integer representing the other site
-			* @throws java.lang.IndexOutOfBoundsException unless both 0 <= p < N and 0 <= q < N
 			*/
 			union: function(p, q) {
 				rootP = service.find(p);
@@ -84,10 +80,7 @@ angular.module('modules.WeightedQuickUnionUF', []).factory('WeightedQuickUnionUF
 					service.sz[rootP] += service.sz[rootQ]; 
 				}
 				service.count--;
-				console.log("count: ", service.count);
 			}	
-
-
 
         };
 

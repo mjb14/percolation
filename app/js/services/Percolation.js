@@ -6,6 +6,8 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 			grid: [],
 			gridSize: 0,
 			init: function(N) {
+				service.grid = [];
+			
 				service.gridSize = N;
 				WeightedQuickUnionUF.init(N*N+2);
 				
@@ -27,7 +29,7 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 				var wufPositionSource;
 				
 				
-				if( !WeightedQuickUnionUF.isOpen(i,j)) {
+				if( !service.isOpen(i,j)) {
 
                 service.grid[i][j] = 1;
 
@@ -84,7 +86,7 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
                     q = j-1;
                     wufPositionTarget = (q) + (service.gridSize  * p) + 1;
                     if(service.isOpen(p,q) &&  !WeightedQuickUnionUF.connected(wufPositionTarget,wufPositionSource)){
-                        console.log("Union (" + wufPositionSource + ", " + wufPositionTarget + ")");
+                        //console.log("Union (" + wufPositionSource + ", " + wufPositionTarget + ")");
                         WeightedQuickUnionUF.union(wufPositionTarget,wufPositionSource);
                     }
                 }
@@ -101,6 +103,7 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 
 			// is site (row i, column j) full?
 			isFull: function(i, j){
+				//console.log("isFull: " + i + ", " + j);
 				return service.grid[i][j] == 0;
 			},
 

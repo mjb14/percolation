@@ -1,0 +1,16 @@
+	.error {
+		border: 1px dotted red;
+		padding: 1em;
+	}
+	.site {
+		border: 1px solid #FFFFFF;
+		font-size: 20px;
+	}
+	.open {
+		background-color: #EEEEEE;
+		color: #EEEEEE;
+	}
+	.closed {
+		color: #000000;
+		background-color: #000000;
+	}
