@@ -13,9 +13,9 @@ Setup Development Environment
 
     ``http://git-scm.com/downloads``
     
-1. Clone the apache-vm from github:  https://github.com/mjb14/apache-vm.git
+1. Clone the percolation project from github:  https://github.com/mjb14/percolation.git
 
-1. Change to the apache-vm root directory
+1. Change to the percolation root directory
 
 1. Build the development environment
 
