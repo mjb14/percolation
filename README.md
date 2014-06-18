@@ -21,22 +21,10 @@ Setup Development Environment
 
     ``vagrant up``
 
-1. SSH into the development environment [skip this for now, it will happen automatically]
-
-    ``vagrant ssh``
-
-1. Change to the vagrant directory [skip this for now, it will happen automatically]
-
-    ``cd /vagrant``
-
-1. Run the startup script [skip this for now, it will happen automatically]
-
-    ``./startup.sh``
-
 
 At this point the server will be running at
 
-    localhost:9595
+    localhost:9696  (Application will be running at http://localhost:9696/app/#)
 
 To stop your vm:
         
