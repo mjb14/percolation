@@ -26,7 +26,7 @@ angular.module('myApp.controllers', [])
 		if(!Percolation.percolates()){
 		    openRandomSite(N);
             Percolation.printGrid();
-			$timeout(function(){openSitesUntilPercolates(N);}, 500, true);
+			$timeout(function(){openSitesUntilPercolates(N);}, 100, true);
 		}
     }
 	
@@ -45,7 +45,7 @@ angular.module('myApp.controllers', [])
         openSitesUntilPercolates(N);
 	}
 	
-	$scope.n = 3;
+	$scope.n = 5;
 	
   
   }]);
