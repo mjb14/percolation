@@ -9,6 +9,12 @@ N: <input type="number" name="input" data-ng-model="n" min="0" max="99" required
 
 <hr>
 
+<div>Open spaces: {{ numberOpen() }}</div>
+<div>Total spaces: {{totalSpaces}}</div>
+<div data-ng-show="totalSpaces">
+% to percolate: {{ (numberOpen() / totalSpaces)*100 | number: 2 }}
+</div>
+
 <div data-ng-repeat="row in grid()">
 	<span data-ng-repeat="item in row track by $index" class="site" data-ng-class="{open: item === 1, closed: item === 0}">
 		-- {{item}} --

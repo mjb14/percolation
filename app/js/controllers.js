@@ -34,8 +34,13 @@ angular.module('myApp.controllers', [])
 		return Percolation.getGrid();
 	}
 	
+	$scope.numberOpen = function() {
+		return Percolation.getNumberOfOpenSpaces();
+	}
+	
 	$scope.runSimulation = function() {
 		var N = $scope.n;
+		$scope.totalSpaces = N * N;
 		Percolation.init(N);
         openSitesUntilPercolates(N);
 	}

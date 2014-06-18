@@ -140,7 +140,21 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 				//System.out.println("Percent Open: " + percentOpen);
 				//System.out.format("% of open sites:  %d", percentOpen);
 
+			},
+			
+			getNumberOfOpenSpaces: function() {
+				var numberOpen = 0;
+				for (var i = 0; i < service.grid.length; i++) {
+					for (var j = 0; j < service.grid[i].length; j++) {
+						if(service.grid[i][j] == 1){
+							numberOpen++;
+						}
+					}
+				}
+				return numberOpen;
 			}
+			
+			
 			
 			
         };
