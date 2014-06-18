@@ -18,7 +18,6 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 						service.grid[i][j] = 0;
 					}
 				}
-				
 			},
 		
 			open: function(i,j) {
@@ -113,6 +112,64 @@ angular.module('modules.Percolation', []).factory('Percolation', [ 'WeightedQuic
 				return WeightedQuickUnionUF.connected(0,service.gridSize * service.gridSize + 1);
 			},
 
+			setSiteAsSolution: function(i,j) {
+				service.grid[i][j] = 9;
+			},
+			
+			getSolutionAsPath: function() {
+				// Get the component identifier for our root
+				var c = WeightedQuickUnionUF.find(0);
+				
+				// Loop over all items, any with same component identifier as our 
+				// root are part of the solution
+				var dataArray = WeightedQuickUnionUF.getArray(); 
+				for(var i=1; i < dataArray.length-1; i++){
+					if(WeightedQuickUnionUF.find(i) === c){
+						console.log(i + " was part of the solution.");
+						
+						var p;
+						var q;
+						var mod = i % service.gridSize;						
+						
+						// determine p
+						if(i <= service.gridSize){
+							p = 0;
+						} else {
+							if(mod !== 0) {
+								p = parseInt(i/service.gridSize);
+							} else {
+								p = i/service.gridSize - 1;
+							}
+						}
+
+						// determine q
+						if(mod !== 0) {
+							q = mod -1;
+						} else {
+							q = service.gridSize - 1;
+						}
+						
+						console.log("p,q: " + p + ", " + q + ", for i = " + i);
+						service.setSiteAsSolution(p,q);
+						// update the value in our grid from 1/0 to 9, where 9 represent solution
+					}
+				}
+				
+				/*
+				console.log(WeightedQuickUnionUF.getArray());
+				console.log(WeightedQuickUnionUF.find(0));
+				console.log(WeightedQuickUnionUF.find(1));
+				console.log(WeightedQuickUnionUF.find(2));
+				console.log(WeightedQuickUnionUF.find(3));
+				console.log(WeightedQuickUnionUF.find(4));
+				console.log(WeightedQuickUnionUF.find(5));
+				console.log(WeightedQuickUnionUF.find(6));
+				console.log(WeightedQuickUnionUF.find(7));
+				console.log(WeightedQuickUnionUF.find(8));
+				console.log(WeightedQuickUnionUF.find(9));
+				console.log(WeightedQuickUnionUF.find(10));
+				*/
+			},
 		
 			getGrid: function(){
 				return service.grid;

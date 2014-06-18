@@ -16,7 +16,7 @@ N: <input type="number" name="input" data-ng-model="n" min="0" max="99" required
 </div>
 
 <div data-ng-repeat="row in grid()">
-	<span data-ng-repeat="item in row track by $index" class="site" data-ng-class="{open: item === 1, closed: item === 0}">
+	<span data-ng-repeat="item in row track by $index" class="site" data-ng-class="{open: item === 1, closed: item === 0, solution: item === 9}">
 		-- {{item}} --
 	</span>
 </div>

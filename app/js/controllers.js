@@ -27,6 +27,9 @@ angular.module('myApp.controllers', [])
 		    openRandomSite(N);
             Percolation.printGrid();
 			$timeout(function(){openSitesUntilPercolates(N);}, 100, true);
+		} else {
+			// flip the correct path for display
+			Percolation.getSolutionAsPath();
 		}
     }
 	
