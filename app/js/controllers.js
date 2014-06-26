@@ -58,6 +58,7 @@ angular.module('myApp.controllers', [])
 	$scope.item = "";
 	$scope.sampleItem = "";
 	$scope.items = [];
+	$scope.randomItems = [];
 	
 	$scope.iterate = function() {
 		$scope.items = [];
@@ -65,7 +66,16 @@ angular.module('myApp.controllers', [])
 		while(i.hasNext()){
 			var s = i.next();
 			$scope.items.push(s);
-			console.log(s);
+		}
+	}
+	
+	
+	$scope.randomIterate = function() {
+		$scope.randomItems = [];
+		var i = LinkedList.randomIterator();
+		while(i.hasNext()){
+			var s = i.next();
+			$scope.randomItems.push(s);
 		}
 	}
 	

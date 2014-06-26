@@ -1,4 +1,26 @@
 
+function shuffle(array) {
+  var currentIndex = array.length
+    , temporaryValue
+    , randomIndex
+    ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 
 function Node(item) {
 	if(item) {
@@ -145,7 +167,6 @@ angular.module('modules.LinkedList', []).factory('LinkedList', [
 					next = new Node();
 					
 					r = service.getRandomNumber();
-					console.log("Random: ", r);
 					for(i = 2; i <= r; i++){
 						next = current.next;
 						current = next;
@@ -156,6 +177,40 @@ angular.module('modules.LinkedList', []).factory('LinkedList', [
 			iterator: function() {
 				i = new ListIterator();
 				i.setCurrent(this.first);
+				return i;
+			},
+			
+			randomIterator: function() {
+				i = new ListIterator();
+				var items = [];
+				
+				current = new Node();
+				current.item = service.first.item;
+				current.next = service.first.next;
+
+				// build our array
+				for(var x = 0; x < service.size(); x++){
+					item = new Node();
+					item.item = current.item;
+					items.push(item);
+					current = current.next;
+				}
+
+				// shuffle the array
+				shuffle(items);
+				
+				// loop over array and connect items
+				var itemsLength = items.length;
+				var lastPos = itemsLength -1;
+				for(var x = 0; x < itemsLength; x++) {
+					if(x != lastPos) {		
+						items[x].next = items[x+1];
+					} else {
+						items[x].next = null;
+					}
+				}
+				
+				i.setCurrent(items[0]);
 				return i;
 			}
 			

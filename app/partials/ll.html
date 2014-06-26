@@ -8,6 +8,7 @@
 <button type="button" data-ng-click="addFirst()" data-ng-disabled="!item">Add First</button>
 <button type="button" data-ng-click="addLast()" data-ng-disabled="!item">Add Last</button>
 <button type="button" data-ng-click="sample()">Sample</button>
+<button type="button" data-ng-click="randomIterate()">Random Iteration</button>
 <button type="button" data-ng-click="removeFirst()">Remove First</button>
 <button type="button" data-ng-click="removeLast()">Remove Last</button>
 
@@ -23,6 +24,9 @@
  -->
 <h4>Iteration</h4>
 <div data-ng-repeat="item in items track by $index">{{item}}</div>
+
+<h4>Random Iteration</h4>
+<div data-ng-repeat="item in randomItems track by $index">{{item}}</div>
 
 <h4>Random Sample</h4>
  {{ sampleItem | json }}
