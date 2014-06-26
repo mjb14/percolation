@@ -1,0 +1,33 @@
+
+
+
+
+<h1>Linked List</h1>
+
+<input type="text" data-ng-model="item" placeholder="item...">
+<button type="button" data-ng-click="addFirst()" data-ng-disabled="!item">Add First</button>
+<button type="button" data-ng-click="addLast()" data-ng-disabled="!item">Add Last</button>
+<button type="button" data-ng-click="sample()">Sample</button>
+<button type="button" data-ng-click="removeFirst()">Remove First</button>
+<button type="button" data-ng-click="removeLast()">Remove Last</button>
+
+<h4>Size</h4>
+ {{ size() }}
+
+ <!--
+ <h4>Last Item</h4>
+ {{ last() }}
+ 
+ <h4>First Item</h4>
+ {{ first() }}
+ -->
+<h4>Iteration</h4>
+<div data-ng-repeat="item in items track by $index">{{item}}</div>
+
+<h4>Random Sample</h4>
+ {{ sampleItem | json }}
+
+
+<h4>Data Set</h4>
+
+<pre>{{ first() | json }}</pre>

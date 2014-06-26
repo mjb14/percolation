@@ -9,5 +9,6 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/wquf', {templateUrl: 'partials/wquf.html', controller: 'WqufController'});
+  $routeProvider.when('/ll', {templateUrl: 'partials/ll.html', controller: 'LinkedListController'});
   $routeProvider.otherwise({redirectTo: '/wquf'});
 }]);

@@ -51,4 +51,64 @@ angular.module('myApp.controllers', [])
 	$scope.n = 5;
 	
   
+  }])
+  
+  .controller('LinkedListController', ['$scope', 'LinkedList', function($scope, LinkedList) {
+
+	$scope.item = "";
+	$scope.sampleItem = "";
+	$scope.items = [];
+	
+	$scope.iterate = function() {
+		$scope.items = [];
+		var i = LinkedList.iterator();
+		while(i.hasNext()){
+			var s = i.next();
+			$scope.items.push(s);
+			console.log(s);
+		}
+	}
+	
+	$scope.sample = function() {
+		$scope.sampleItem = LinkedList.sample();
+	}
+  
+	$scope.first = function() {
+		return LinkedList.getFirst();
+	}	
+	
+	$scope.size = function() {
+		return LinkedList.size();
+	}
+	
+	$scope.addFirst = function() {
+		LinkedList.addFirst($scope.item);
+		$scope.item = "";
+		$scope.iterate();
+	}
+	
+	$scope.removeFirst = function() {
+		LinkedList.removeFirst();
+		$scope.iterate();
+	}
+  
+	$scope.removeLast = function() {
+		LinkedList.removeLast();
+		$scope.iterate();
+	}
+  
+	$scope.addLast = function() {
+		LinkedList.addLast($scope.item);
+		$scope.item = "";
+		$scope.iterate();
+	}
+	
+	$scope.last = function(){
+		return LinkedList.getLast();
+	}
+  
+  $scope.first = function(){
+		return LinkedList.getFirst();
+	}
+  
   }]);
