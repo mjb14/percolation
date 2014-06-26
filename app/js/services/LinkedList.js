@@ -181,7 +181,14 @@ angular.module('modules.LinkedList', []).factory('LinkedList', [
 			},
 			
 			randomIterator: function() {
+			
 				i = new ListIterator();
+				
+				if( !service.size() ){
+					i.setCurrent(null);
+					return i;
+				}
+				
 				var items = [];
 				
 				current = new Node();
